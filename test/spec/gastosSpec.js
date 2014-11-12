@@ -38,11 +38,7 @@ describe("Modelo Gastos", function() {
     describe( "Podemos guardar en servidor", function() {
         beforeEach(function() {
             this.server = sinon.fakeServer.create();
-        });
-        afterEach(function() {
-            this.server.restore();
-        });
-        it( "#save", function() {
+
             var request, params,
                 gastosModel = new APP.models.Gastos();
             
@@ -51,12 +47,32 @@ describe("Modelo Gastos", function() {
                 descripcion:"hola mundo"
             });
 
-            request = this.server.requests[0];
-            params = JSON.parse(request.requestBody);
+            this.request = this.server.requests[0];
+            this.params = JSON.parse(this.request.requestBody);
 
-            expect(params.cantidad).toEqual("1.23");
-            expect(params.descripcion).toEqual("hola mundo");
-            expect(params.complete).toBeFalsy();
+        });
+        afterEach(function() {
+            this.server.restore();
+        });
+        it( "#save", function() {
+            expect(this.params.cantidad).toEqual("1.23");
+            expect(this.params.descripcion).toEqual("hola mundo");
+            expect(this.params.complete).toBeFalsy();
+        });
+        it( "El método es POST", function() {
+            expect(this.request.method).toEqual( "POST");
+            expect(this.request.method).not.toEqual( "PUT");
+            expect(this.request.method).not.toEqual( "DELETE");
+            expect(this.request.method).not.toEqual( "GET");
+        });
+        it( "La url apunta a 'gastos'", function() {
+            expect(this.request.url).toEqual( "gastos");
+            expect(this.request.url).not.toEqual( "/gastos");
+            expect(this.request.url).not.toEqual( "gastos/");
+            expect(this.request.url).not.toEqual( "gestos");
+        });
+        it( "Y es asíncrono", function() {
+            expect(this.request.async).toBeTruthy();
         });
     });
 });
