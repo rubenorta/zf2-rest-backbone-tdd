@@ -136,6 +136,20 @@ $(function(){
 
         },
 
+        successCreate: function( model, response ) {
+            model.collection.fetch({
+                reset:true,
+                success: function(){
+                    toastr.success('Se ha añadido correctamente el gasto en la base de datos', 'Gasto añadido');
+                    APP.router.navigate("gastos", { trigger:true } );
+                }
+            });
+        },
+
+        errorCreate: function(){
+            toastr.error('No se ha podido añadir el gasto', 'Error');
+        },
+
         render: function() {
             this.$el.append( this.template() )
             return this;
