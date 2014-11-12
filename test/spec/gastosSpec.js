@@ -8,9 +8,9 @@ describe("APP existe en global scope", function() {
             expect( APP.namespace ).toBeDefined();
         });
         it( "y crea objetos vacíos donde almacenar los módulos", function() {
-            APP.namespace( "APP.router" );
-            expect( APP.router ).toBeDefined();
-            expect( APP.router ).toEqual({});
+            APP.namespace( "APP.pepe" );
+            expect( APP.pepe ).toBeDefined();
+            expect( APP.pepe ).toEqual({});
         });
     });
 });
@@ -277,5 +277,25 @@ describe( "View Gastos Formulario", function() {
         });
     });
 
+});
 
+describe("Router", function() {
+    var router;
+
+    afterEach( function(){
+        Backbone.history.stop();
+    });
+
+    it( "Sirve para crear instancias de Backbone Router", function() {
+        router = new APP.routers();
+        expect( router instanceof Backbone.Router ).toBe( true );
+    });
+
+    it("Ejecuta el método 'listado' cuando el router va a gastos", function() {
+        spyOn(APP.routers.prototype, "listado");
+        router = new APP.routers();
+        Backbone.history.start();      
+        router.navigate('gastos', true);
+        expect(APP.routers.prototype.listado).toHaveBeenCalled();
+    });
 });

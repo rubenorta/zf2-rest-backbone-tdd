@@ -8,7 +8,7 @@ var APP = APP || {};
     app.pageID = "#page",
 
     app.init = function () {
-        app.router = new APP.router();
+        app.router = new APP.routers();
         Backbone.history.start();
     };
 

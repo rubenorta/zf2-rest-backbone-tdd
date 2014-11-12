@@ -53,7 +53,7 @@ $(function(){
         },
 
         getAll: function(){
-            this.collection.fetch();
+            //this.collection.fetch();
         },
 
         render: function() {
@@ -71,6 +71,16 @@ $(function(){
                 .find("#gastos")
                 .append( container );
             
+            return this;
+        },
+
+        destroy: function(){
+            this.stopListening();
+            this.undelegateEvents();
+            this.$el
+                .find("#listado")
+                .remove();
+
             return this;
         }
 
@@ -154,6 +164,16 @@ $(function(){
             this.$el.append( this.template() )
             return this;
         },
+
+        destroy: function(){
+            this.stopListening();
+            this.undelegateEvents();
+            this.$el
+                .find("#formulario")
+                .remove();
+
+            return this;
+        }
 
     });
 
