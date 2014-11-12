@@ -14,3 +14,9 @@ describe("APP existe en global scope", function() {
         });
     });
 });
+
+describe("Modelo Gastos", function() {
+    it('Está definido', function() {
+        expect(APP.models.Gastos).toBeDefined();
+    });
+});
