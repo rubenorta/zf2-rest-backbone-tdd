@@ -21,7 +21,7 @@ $(function(){
         },
 
         redirect: function(){
-           // this.navigate( "gastos/", true );
+           this.navigate( "gastos/", true );
         },
 
         loadView : function( view, callback ) {

@@ -53,7 +53,7 @@ $(function(){
         },
 
         getAll: function(){
-            //this.collection.fetch();
+            this.collection.fetch();
         },
 
         render: function() {
