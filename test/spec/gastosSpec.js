@@ -15,7 +15,7 @@ describe("APP existe en global scope", function() {
     });
 });
 
-describe("Modelo Gastos", function() {
+describe("Model Gastos", function() {
     it( "Está definido", function() {
         expect( APP.models.Gastos ).toBeDefined();
     });
@@ -74,5 +74,19 @@ describe("Modelo Gastos", function() {
         it( "Y es asíncrono", function() {
             expect(this.request.async).toBeTruthy();
         });
+    });
+});
+
+describe('Collection Gastos', function() {
+    it( "Está definida", function() {
+        expect( APP.collections.Gastos ).toBeDefined();
+    });
+    it( "Sirve para crear instancias de Backbone Collection", function() {
+        var gastosCollection = new APP.models.Gastos();
+        expect( gastosCollection instanceof Backbone.Collection ).toEqual( true );
+    });
+    it( "Sirve para crear instancias de Backbone Collection", function() {
+        var gastosCollection = new APP.models.Gastos();
+        expect( gastosCollection instanceof Backbone.Collection ).toEqual( true );
     });
 });
