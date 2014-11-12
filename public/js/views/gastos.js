@@ -6,12 +6,12 @@ $(function(){
         model: null,
         tagName: 'tr',
         className: 'gasto',
-        
+
         template: _.template(
             '<td class="cantidad"><%= cantidad %></td>'+
             '<td class="descripcion"><%= descripcion %></td>'
         ),
-        
+
         initialize: function( options ){
             this.model = options && options.model || new APP.models.Gastos();
             this.listenTo(this.model, 'change', this.render);
@@ -26,8 +26,8 @@ $(function(){
 
     APP.namespace( "APP.views.Gastos.Listado" );
     APP.views.Gastos.Listado = Backbone.View.extend({
-        
-        el:"#page",
+
+        el: "#page",
         model: null,
         collection: null,
 

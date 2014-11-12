@@ -5,6 +5,12 @@ var APP = APP || {};
     "use strict";
 
     app.global = this;
+    app.pageID = "#page",
+
+    app.init = function () {
+        app.router = new APP.router();
+        Backbone.history.start();
+    };
 
     /** 
      * @desc: crea la estructura necesaria para alojar nuestro módulo en la ruta
