@@ -83,6 +83,10 @@ $(function(){
         model: null,
         collection: null,
 
+        events: {
+            "click #addgasto": "addGasto",
+        },
+
         template: _.template(
             '<div id="formulario">'+
                 '<h3>Añadir gasto:</h3>'+
@@ -100,6 +104,36 @@ $(function(){
 
         initialize: function( options ){
             this.collection = options && options.collection || new APP.collections.Gastos();
+            this.model = options && options.model || new APP.models.Gastos();
+        },
+
+        addGasto: function() {
+            var numRegExp = new RegExp('^[0-9]+$'),
+                cantidadValue = this.$el.find("#cantidad").val(),
+                descripcionValue = this.$el.find("#descripcion").val();
+
+
+            if (descripcionValue === ""){
+                toastr.error('Debe rellenar la descripción', 'Error');
+                return;
+            }
+            if( isNaN( parseFloat( cantidadValue ) ) ){
+                toastr.error('La cantidad debe ser un número', 'Error');
+                return;
+            }
+
+            this.model.set({
+                "cantidad":cantidadValue,
+                "descripcion":descripcionValue
+            });
+
+            this.collection.create( this.model, {
+                silent: true, 
+                wait: true, 
+                success: this.successCreate,
+                error: this.errorCreate
+            });
+
         },
 
         render: function() {
