@@ -27,6 +27,7 @@ $(function(){
     APP.namespace( "APP.views.Gastos.Listado" );
     APP.views.Gastos.Listado = Backbone.View.extend({
         
+        el:"#page",
         model: null,
         collection: null,
 

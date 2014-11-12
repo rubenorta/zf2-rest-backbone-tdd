@@ -208,14 +208,17 @@ describe("View Gastos Listado", function() {
     });
     describe("Se puede renderizar, si le pasamos un modelo", function () {
         beforeEach(function () {
+            var fixture = setFixtures('<div id="page"></div>');
             gastosCollection = new APP.collections.Gastos();
             gastosModel1 = new APP.models.Gastos({"cantidad":"1","descripcion":"aa"});
             gastosModel2 = new APP.models.Gastos({"cantidad":"2","descripcion":"bb"});
             gastosModel3 = new APP.models.Gastos({"cantidad":"3","descripcion":"cc"});
-            gastosCollection.set([gastosModel1,gastosModel2,gastosModel3]);
+            gastosCollection.set([ gastosModel1, gastosModel2, gastosModel3 ]);
             gastosListadoView = new APP.views.Gastos.Listado({collection:gastosCollection});
-            //gastosListadoView.getAll();
             gastosListadoView.render();
+        });
+        it("Debe usar una capa #page", function() {
+            expect(gastosListadoView.el.nodeName).toEqual("DIV");
         });
         it ("En la primera fila, la celda 'cantidad' vale '1'", function () {
             expect(gastosListadoView.$el.find("#gastos tr:eq(0) td.cantidad")).toContainText("1");
