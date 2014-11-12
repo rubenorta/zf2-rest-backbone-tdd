@@ -1,0 +1,14 @@
+{
+    "name": "AntevenioProcesoDeSeleccion",
+    "description": "Antevenio - Proceso de selección",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "antevenio",
+        "seleccion"
+    ],
+    "homepage": "http://www.antevenio.com/",
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zendframework": "2.3.*"
+    }
+}

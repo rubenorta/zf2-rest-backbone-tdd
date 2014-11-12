@@ -1,0 +1,84 @@
+body {
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
+
+.navbar-brand {
+  width: 230px;
+  line-height: 25px;
+}
+.navbar-brand img {
+  float: left;
+}
+.navbar-nav > li > a {
+  line-height: 25px;
+}
+
+.btn-success {
+  background-color: #fc802b;
+  background-image: -moz-linear-gradient(top, #ef7000, #fc802b);
+  background-image: -ms-linear-gradient(top, #ef7000, #fc802b);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ef7000), to(#fc802b));
+  background-image: -webkit-linear-gradient(top, #ef7000, #fc802b);
+  background-image: -o-linear-gradient(top, #ef7000, #fc802b);
+  background-image: linear-gradient(top, #ef7000, #fc802b);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ef7000', endColorstr='#fc802b', GradientType=0);
+}
+
+.btn-success:hover,
+.btn-success:active,
+.btn-success.active,
+.btn-success.disabled,
+.btn-success[disabled] {
+  background-color: #fc802b;
+}
+
+.btn-success:active, .btn-success.active {
+  background-color: #fc802b;
+}
+
+.input-error {
+  border-color: #a94442;
+}
+.form-group {
+  float: none;
+  display: block;
+  clear: both;
+}
+.form-group ul {
+  float: none;
+  display: block;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.form-group ul li{
+  float: left;
+  margin: 5px 0;
+  color: #a94442;
+}
+table.gastos th {
+  background-color: #f2f2f2
+}
+table.gastos .cantidad {
+  width: 15%;
+  text-align: right;
+}
+table.gastos .acciones {
+  width: 15%;
+  text-align: center;
+}
+
+.container {
+  position: relative;
+}
+
+.is-hidden {
+  display: none;
+}
+.is-visible {
+  display: block;
+}
+
+
+

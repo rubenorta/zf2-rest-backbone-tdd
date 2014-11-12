@@ -1,0 +1,62 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: AntevenioProcesoSeleccion\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-11-06 17:17-0700\n"
+"PO-Revision-Date: 2014-11-09 03:14+0100\n"
+"Last-Translator: alfonsomartinde <alfonsomartin@gmail.com>\n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: translate\n"
+"X-Poedit-Basepath: .\n"
+"Language-Team: Alfonso Martín de Pozuelo Cumplido <alfonsomartin@gmail.com>\n"
+"X-Generator: Poedit 1.6.10\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../view/gastos/gastos/index.phtml:
+msgid "Expenses list"
+msgstr ""
+
+#: ../view/gastos/gastos/create.phtml:
+msgid "Create expense"
+msgstr ""
+
+#: ../view/gastos/gastos/update.phtml:
+msgid "Update expense"
+msgstr ""
+
+#: ../view/gastos/gastos/delete.phtml:
+msgid "Delete expense"
+msgstr ""
+
+#: ../view/gastos/gastos/delete.phtml:
+msgid "Are you sure that you want to delete this expense?"
+msgstr ""
+
+#: ../view/gastos/gastos/delete.phtml:
+msgid "Yes"
+msgstr ""
+
+#: ../view/gastos/gastos/delete.phtml:
+msgid "No"
+msgstr ""
+
+#: ../view/gastos/gastos/read.phtml:
+msgid "Expense"
+msgstr ""
+
+#: ../view/gastos/gastos/index.phtml: ../view/gastos/gastos/create.phtml:
+#: ../view/gastos/gastos/read.phtml: ../view/gastos/gastos/update.phtml:
+#: ../view/gastos/gastos/delete.phtml:
+msgid "Amount"
+msgstr ""
+
+#: ../view/gastos/gastos/index.phtml: ../view/gastos/gastos/create.phtml:
+#: ../view/gastos/gastos/read.phtml: ../view/gastos/gastos/update.phtml:
+#: ../view/gastos/gastos/delete.phtml:
+msgid "Description"
+msgstr ""
