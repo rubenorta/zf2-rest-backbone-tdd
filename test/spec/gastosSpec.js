@@ -200,6 +200,51 @@ describe("View Gastos Listado", function() {
         var gastosListadoView = new APP.views.Gastos.Listado();
         expect( gastosListadoView instanceof Backbone.View ).toEqual( true );
     });
+    describe("Si la inicializamos sin modelo", function () {
+        it("Lanza una excepción", function () {
+            expect(function () {
+                new APP.views.Gastos.Item();
+            }).toThrow(new Error( "Es necesario un modelo" ));
+        });
+    });
+    describe("Se pueden crear vistas a partir de ella", function () {
+        beforeEach(function () {
+            gastosItemView = new APP.views.Gastos.Item({model: APP.models.Gastos});
+        });
+        it ("La nueva vista no es undefined", function () {
+            expect( gastosItemView ).toBeDefined();
+        });
+    });
+    describe("Se puede renderizar, si le pasamos un modelo", function () {
+        beforeEach(function () {
+            gastosCollection = new APP.collections.Gastos();
+            gastosModel1 = new APP.models.Gastos({"cantidad":"1","descripcion":"aa"});
+            gastosModel2 = new APP.models.Gastos({"cantidad":"2","descripcion":"bb"});
+            gastosModel3 = new APP.models.Gastos({"cantidad":"3","descripcion":"cc"});
+            gastosCollection.set([gastosModel1,gastosModel2,gastosModel3]);
+            gastosListadoView = new APP.views.Gastos.Listado({collection:gastosCollection});
+            //gastosListadoView.getAll();
+            gastosListadoView.render();
+        });
+        it ("En la primera fila, la celda 'cantidad' vale '1'", function () {
+            expect(gastosListadoView.$el.find("#gastos tr:eq(0) td.cantidad")).toContainText("1");
+        });
+        it ("En la primera fila, la celda 'descripcion' vale 'aa'", function () {
+            expect(gastosListadoView.$el.find("#gastos tr:eq(0) td.descripcion")).toContainText("aa");
+        });
+        it ("En la segunda fila, la celda 'cantidad' vale '2'", function () {
+            expect(gastosListadoView.$el.find("#gastos tr:eq(1) td.cantidad")).toContainText("2");
+        });
+        it ("En la segunda fila, la celda 'descripcion' vale 'bb'", function () {
+            expect(gastosListadoView.$el.find("#gastos tr:eq(1) td.descripcion")).toContainText("bb");
+        });
+        it ("En la tercera fila, la celda 'cantidad' vale '3'", function () {
+            expect(gastosListadoView.$el.find("#gastos tr:eq(2) td.cantidad")).toContainText("3");
+        });
+        it ("En la tercera fila, la celda 'descripcion' vale 'cc'", function () {
+            expect(gastosListadoView.$el.find("#gastos tr:eq(2) td.descripcion")).toContainText("cc");
+        });
+    });
 });
 
 describe("View Gastos Formulario", function() {
