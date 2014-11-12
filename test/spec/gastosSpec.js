@@ -16,15 +16,17 @@ describe("APP existe en global scope", function() {
 });
 
 describe("Model Gastos", function() {
+    var gastosModel, request, params;
+    
     it( "Está definido", function() {
         expect( APP.models.Gastos ).toBeDefined();
     });
     it( "Sirve para crear instancias de Backbone Model", function() {
-        var gastosModel = new APP.models.Gastos();
+        gastosModel = new APP.models.Gastos();
         expect( gastosModel instanceof Backbone.Model ).toEqual( true );
     });
     it( "Tiene los atributos cantidad, descripción e id", function() {
-        var gastosModel = new APP.models.Gastos();
+        gastosModel = new APP.models.Gastos();
         expect( gastosModel.get( "cantidad" ) ).toEqual( null );
         expect( gastosModel.get( "descripcion" ) ).toEqual( null );
         expect( gastosModel.get( "id" ) ).toEqual( null );
@@ -34,38 +36,33 @@ describe("Model Gastos", function() {
     describe( "Podemos guardar en servidor", function() {
         beforeEach(function() {
             this.server = sinon.fakeServer.create();
-
-            var request, params,
-                gastosModel = new APP.models.Gastos();
-            
+            gastosModel = new APP.models.Gastos();
             gastosModel.save({
                 cantidad: "1.23",
                 descripcion:"hola mundo"
             });
-
             this.request = this.server.requests[0];
             this.params = JSON.parse(this.request.requestBody);
-
         });
         afterEach(function() {
             this.server.restore();
         });
         it( "Los parámetros los envía correctamente", function() {
-            expect(this.params.cantidad).toEqual("1.23");
-            expect(this.params.descripcion).toEqual("hola mundo");
-            expect(this.params.complete).toBeFalsy();
+            expect( this.params.cantidad ).toEqual( "1.23" );
+            expect( this.params.descripcion ).toEqual( "hola mundo" );
+            expect( this.params.complete ).toBeFalsy();
         });
         it( "El método es POST", function() {
-            expect(this.request.method).toEqual( "POST");
-            expect(this.request.method).not.toEqual( "PUT");
-            expect(this.request.method).not.toEqual( "DELETE");
-            expect(this.request.method).not.toEqual( "GET");
+            expect( this.request.method ).toEqual( "POST");
+            expect( this.request.method ).not.toEqual( "PUT");
+            expect( this.request.method ).not.toEqual( "DELETE");
+            expect( this.request.method ).not.toEqual( "GET");
         });
         it( "La url apunta a 'gastos'", function() {
-            expect(this.request.url).toEqual( "gastos");
-            expect(this.request.url).not.toEqual( "/gastos");
-            expect(this.request.url).not.toEqual( "gastos/");
-            expect(this.request.url).not.toEqual( "gestos");
+            expect(this.request.url).toEqual( "gastos" );
+            expect(this.request.url).not.toEqual( "/gastos" );
+            expect(this.request.url).not.toEqual( "gastos/" );
+            expect(this.request.url).not.toEqual( "gestos" );
         });
         it( "Y es asíncrono", function() {
             expect(this.request.async).toBeTruthy();
@@ -74,26 +71,25 @@ describe("Model Gastos", function() {
 });
 
 describe("Collection Gastos", function() {
+    var gastosCollection, gastosCollectionModel, request;
+
     it( "Está definida", function() {
         expect( APP.collections.Gastos ).toBeDefined();
     });
     it( "Sirve para crear instancias de Backbone Collection", function() {
-        var gastosCollection = new APP.collections.Gastos();
+        gastosCollection = new APP.collections.Gastos();
         expect( gastosCollection instanceof Backbone.Collection ).toEqual( true );
     });
     it( "Su modelo es APP.models.Gastos", function() {
-        var gastosCollection = new APP.collections.Gastos(),
-            gastosCollectionModel = new gastosCollection.model();
+        gastosCollection = new APP.collections.Gastos();
+        gastosCollectionModel = new gastosCollection.model();
         expect( gastosCollectionModel instanceof APP.models.Gastos ).toEqual( true );
     });
 
     describe( "Podemos recuperar datos del servidor", function() {
         beforeEach(function() {
             this.server = sinon.fakeServer.create();
-            
-            var request,
-                gastosCollection = new APP.collections.Gastos();
-            
+            gastosCollection = new APP.collections.Gastos();
             gastosCollection.fetch();
             this.request = this.server.requests[0];
         });
@@ -158,13 +154,13 @@ describe("View Gastos Item", function() {
         expect( APP.views.Gastos.Item ).toBeDefined();
     });
     it( "Sirve para crear instancias de Backbone View", function() {
-        var gastosModel = new APP.models.Gastos();
-        var gastosItemView = new APP.views.Gastos.Item({model: gastosModel});
+        gastosModel = new APP.models.Gastos();
+        gastosItemView = new APP.views.Gastos.Item({model: gastosModel});
         expect( gastosItemView instanceof Backbone.View ).toEqual( true );
     });
     describe("Se pueden crear vistas a partir de ella", function () {
-        beforeEach(function () {
-            var gastosModel = new APP.models.Gastos();
+        beforeEach( function () {
+            gastosModel = new APP.models.Gastos();
             gastosItemView = new APP.views.Gastos.Item({model: gastosModel});
         });
         it ("La nueva vista no es undefined", function () {
@@ -172,22 +168,22 @@ describe("View Gastos Item", function() {
         });
     });
     describe("Se puede renderizar, si le pasamos un modelo", function () {
-        beforeEach(function () {
+        beforeEach( function () {
             gastosModel = new APP.models.Gastos();
-            gastosModel.set({"cantidad":"1","descripcion":"aa"});
-            gastosItemView = new APP.views.Gastos.Item({model:gastosModel});
+            gastosModel.set( { "cantidad": "1", "descripcion": "aa" } );
+            gastosItemView = new APP.views.Gastos.Item( {model:gastosModel} );
             gastosItemView.render();
         });
-        it ("La celda 'cantidad' vale '1'", function () {
-            expect(gastosItemView.$el.find("td.cantidad")).toContainText("1");
+        it( "La celda 'cantidad' vale '1'", function () {
+            expect( gastosItemView.$el.find( "td.cantidad") ).toContainText( "1" );
         });
-        it ("La celda 'descripcion' vale 'aa'", function () {
-            expect(gastosItemView.$el.find("td.descripcion")).toContainText("aa");
+        it( "La celda 'descripcion' vale 'aa'", function () {
+            expect( gastosItemView.$el.find( "td.descripcion" ) ).toContainText( "aa" );
         });
     });
 });
 
-describe("View Gastos Listado", function() {
+describe( "View Gastos Listado", function() {
     var gastosItemView, gastosListadoView, gastosModel;
 
     it( "Está definida", function() {
@@ -197,52 +193,52 @@ describe("View Gastos Listado", function() {
         gastosListadoView = new APP.views.Gastos.Listado();
         expect( gastosListadoView instanceof Backbone.View ).toEqual( true );
     });
-    describe("Se pueden crear vistas a partir de ella", function () {
-        beforeEach(function () {
+    describe( "Se pueden crear vistas a partir de ella", function () {
+        beforeEach( function () {
             gastosModel = new APP.models.Gastos();
-            gastosItemView = new APP.views.Gastos.Item({model: gastosModel});
+            gastosItemView = new APP.views.Gastos.Item( { model: gastosModel } );
         });
-        it ("La nueva vista no es undefined", function () {
+        it ( "La nueva vista no es undefined", function () {
             expect( gastosItemView ).toBeDefined();
         });
     });
     describe("Se puede renderizar, si le pasamos un modelo", function () {
-        beforeEach(function () {
+        beforeEach( function () {
             var fixture = setFixtures('<div id="page"></div>');
             gastosCollection = new APP.collections.Gastos();
-            gastosModel1 = new APP.models.Gastos({"cantidad":"1","descripcion":"aa"});
-            gastosModel2 = new APP.models.Gastos({"cantidad":"2","descripcion":"bb"});
-            gastosModel3 = new APP.models.Gastos({"cantidad":"3","descripcion":"cc"});
-            gastosCollection.set([ gastosModel1, gastosModel2, gastosModel3 ]);
-            gastosListadoView = new APP.views.Gastos.Listado({collection:gastosCollection});
+            gastosModel1 = new APP.models.Gastos( {"cantidad":"1","descripcion":"aa"} );
+            gastosModel2 = new APP.models.Gastos( {"cantidad":"2","descripcion":"bb"} );
+            gastosModel3 = new APP.models.Gastos( {"cantidad":"3","descripcion":"cc"} );
+            gastosCollection.set( [ gastosModel1, gastosModel2, gastosModel3 ] );
+            gastosListadoView = new APP.views.Gastos.Listado( { collection: gastosCollection } );
             gastosListadoView.render();
         });
-        it("Debe usar una capa #page", function() {
-            expect(gastosListadoView.el.nodeName).toEqual("DIV");
+        it( "Debe usar una capa #page", function() {
+            expect( gastosListadoView.el.nodeName ).toEqual( "DIV" );
         });
-        it ("En la primera fila, la celda 'cantidad' vale '1'", function () {
-            expect(gastosListadoView.$el.find("#gastos tr:eq(0) td.cantidad")).toContainText("1");
+        it( "En la primera fila, la celda 'cantidad' vale '1'", function () {
+            expect( gastosListadoView.$el.find( "#gastos tr:eq(0) td.cantidad" ) ).toContainText( "1" );
         });
-        it ("En la primera fila, la celda 'descripcion' vale 'aa'", function () {
-            expect(gastosListadoView.$el.find("#gastos tr:eq(0) td.descripcion")).toContainText("aa");
+        it( "En la primera fila, la celda 'descripcion' vale 'aa'", function () {
+            expect( gastosListadoView.$el.find( "#gastos tr:eq(0) td.descripcion" ) ).toContainText( "aa" );
         });
-        it ("En la segunda fila, la celda 'cantidad' vale '2'", function () {
-            expect(gastosListadoView.$el.find("#gastos tr:eq(1) td.cantidad")).toContainText("2");
+        it( "En la segunda fila, la celda 'cantidad' vale '2'", function () {
+            expect( gastosListadoView.$el.find( "#gastos tr:eq(1) td.cantidad" ) ).toContainText( "2" );
         });
-        it ("En la segunda fila, la celda 'descripcion' vale 'bb'", function () {
-            expect(gastosListadoView.$el.find("#gastos tr:eq(1) td.descripcion")).toContainText("bb");
+        it( "En la segunda fila, la celda 'descripcion' vale 'bb'", function () {
+            expect( gastosListadoView.$el.find( "#gastos tr:eq(1) td.descripcion" ) ).toContainText( "bb" );
         });
-        it ("En la tercera fila, la celda 'cantidad' vale '3'", function () {
-            expect(gastosListadoView.$el.find("#gastos tr:eq(2) td.cantidad")).toContainText("3");
+        it( "En la tercera fila, la celda 'cantidad' vale '3'", function () {
+            expect( gastosListadoView.$el.find( "#gastos tr:eq(2) td.cantidad" ) ).toContainText( "3" );
         });
-        it ("En la tercera fila, la celda 'descripcion' vale 'cc'", function () {
-            expect(gastosListadoView.$el.find("#gastos tr:eq(2) td.descripcion")).toContainText("cc");
+        it( "En la tercera fila, la celda 'descripcion' vale 'cc'", function () {
+            expect( gastosListadoView.$el.find( "#gastos tr:eq(2) td.descripcion" ) ).toContainText( "cc" );
         });
     });
 
 });
 
-describe("View Gastos Formulario", function() {
+describe( "View Gastos Formulario", function() {
     var gastosFormularioView;
 
     it( "Está definida", function() {
@@ -252,32 +248,32 @@ describe("View Gastos Formulario", function() {
         gastosFormularioView = new APP.views.Gastos.Formulario();
         expect( gastosFormularioView instanceof Backbone.View ).toEqual( true );
     });
-    describe("Se pueden crear vistas a partir de ella", function () {
-        beforeEach(function () {
+    describe( "Se pueden crear vistas a partir de ella", function () {
+        beforeEach( function () {
             gastosModel = new APP.models.Gastos();
-            gastosItemView = new APP.views.Gastos.Item({model: gastosModel});
+            gastosItemView = new APP.views.Gastos.Item( {model: gastosModel} );
         });
-        it ("La nueva vista no es undefined", function () {
+        it ( "La nueva vista no es undefined", function () {
             expect( gastosItemView ).toBeDefined();
         });
     });
-    describe("Se renderiza en la capa #page", function () {
-        beforeEach(function () {
+    describe( "Se renderiza en la capa #page", function () {
+        beforeEach( function () {
             var fixture = setFixtures('<div id="page"></div>');
             gastosFormularioView = new APP.views.Gastos.Formulario();
             gastosFormularioView.render();
         });
-        it("Debe usar una capa #page", function() {
-            expect(gastosFormularioView.el.nodeName).toEqual("DIV");
+        it( "Debe usar una capa #page", function() {
+            expect( gastosFormularioView.el.nodeName ).toEqual( "DIV" );
         });
-        it ("Tiene un input con id #cantidad", function () {
-            expect(gastosFormularioView.$el.find("input#cantidad")).toExist();
+        it( "Tiene un input con id #cantidad", function () {
+            expect( gastosFormularioView.$el.find( "input#cantidad" ) ).toExist();
         });
-        it ("TIene un textarea con id #descripcion", function () {
-            expect(gastosFormularioView.$el.find("textarea#descripcion")).toExist();
+        it( "Tiene un textarea con id #descripcion", function () {
+            expect( gastosFormularioView.$el.find( "textarea#descripcion" ) ).toExist();
         });
-        it ("Tiene un botón para enviar datos con id #addgasto", function () {
-            expect(gastosFormularioView.$el.find("input#addgasto")).toExist();
+        it( "Tiene un botón para enviar datos con id #addgasto", function () {
+            expect( gastosFormularioView.$el.find( "input#addgasto" ) ).toExist();
         });
     });
 

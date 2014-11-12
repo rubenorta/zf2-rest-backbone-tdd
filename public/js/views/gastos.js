@@ -78,6 +78,34 @@ $(function(){
 
     APP.namespace( "APP.views.Gastos.Formulario" );
     APP.views.Gastos.Formulario = Backbone.View.extend({
+        
+        el: "#page",
+        model: null,
+        collection: null,
+
+        template: _.template(
+            '<div id="formulario">'+
+                '<h3>Añadir gasto:</h3>'+
+                '<div class="form-group clearfix">'+
+                    '<label for="cantidad">Cantidad</label>'+
+                    '<input type="number" name="cantidad" id="cantidad" class="form-control" placeholder="Cantidad" step="0.01" value="" />'+
+                '</div>'+
+                '<div class="form-group clearfix">'+
+                    '<label for="descripcion">Descripción</label>'+
+                    '<textarea name="descripcion" id="descripcion" class="form-control" placeholder="Descripción"></textarea>'+
+                '</div>'+
+                '<input type="submit" name="submit" id="addgasto" class="btn btn-default" value="Enviar datos" />'+
+            '</div>'
+        ),
+
+        initialize: function( options ){
+            this.collection = options && options.collection || new APP.collections.Gastos();
+        },
+
+        render: function() {
+            this.$el.append( this.template() )
+            return this;
+        },
 
     });
 
