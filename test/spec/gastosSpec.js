@@ -23,4 +23,15 @@ describe("Modelo Gastos", function() {
         var gastosModel = new APP.models.Gastos();
         expect( gastosModel instanceof Backbone.Model ).toEqual( true );
     });
+    it('Sirve para crear instancias de Backbone Model', function() {
+        var gastosModel = new APP.models.Gastos();
+        expect( gastosModel instanceof Backbone.Model ).toEqual( true );
+    });
+    it('Tiene los atributos cantidad, descripción e id', function() {
+        var gastosModel = new APP.models.Gastos();
+        expect( gastosModel.get( 'cantidad' ) ).toEqual( null );
+        expect( gastosModel.get( 'descripcion' ) ).toEqual( null );
+        expect( gastosModel.get( 'id' ) ).toEqual( null );
+        expect( gastosModel.get( 'pepe' ) ).toBeUndefined();
+    });
 });
