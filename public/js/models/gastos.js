@@ -11,6 +11,6 @@ $(function(){
 
     APP.namespace( "APP.collections.Gastos" );
     APP.collections.Gastos = Backbone.Collection.extend({
-
+        model: APP.models.Gastos,
     });
 });
