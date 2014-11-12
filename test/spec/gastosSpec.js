@@ -86,4 +86,34 @@ describe('Collection Gastos', function() {
             gastosCollectionModel = new gastosCollection.model();
         expect( gastosCollectionModel instanceof APP.models.Gastos ).toEqual( true );
     });
+
+    describe( "Podemos recuperar datos del servidor", function() {
+        beforeEach(function() {
+            this.server = sinon.fakeServer.create();
+            
+            var request,
+                gastosCollection = new APP.collections.Gastos();
+            
+            gastosCollection.fetch();
+            this.request = this.server.requests[0];
+        });
+        afterEach(function() {
+            this.server.restore();
+        });
+        it( "El método es GET", function() {
+            expect(this.request.method).not.toEqual( "POST");
+            expect(this.request.method).not.toEqual( "PUT");
+            expect(this.request.method).not.toEqual( "DELETE");
+            expect(this.request.method).toEqual( "GET");
+        });
+        it( "La url apunta a 'gastos'", function() {
+            expect(this.request.url).toEqual( "gastos");
+            expect(this.request.url).not.toEqual( "/gastos");
+            expect(this.request.url).not.toEqual( "gastos/");
+            expect(this.request.url).not.toEqual( "gestos");
+        });
+        it( "Y es asíncrono", function() {
+            expect(this.request.async).toBeTruthy();
+        });
+    });
 });
