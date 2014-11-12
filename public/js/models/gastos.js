@@ -12,6 +12,9 @@ $(function(){
     APP.namespace( "APP.collections.Gastos" );
     APP.collections.Gastos = Backbone.Collection.extend({
         model: APP.models.Gastos,
-        url: "gastos"
+        url: "gastos",
+        parse: function( response ) {
+            return response.gastos;
+        }
     });
 });
