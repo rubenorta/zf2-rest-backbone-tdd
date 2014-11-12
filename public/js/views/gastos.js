@@ -10,4 +10,9 @@ $(function(){
 
     });
 
+    APP.namespace( "APP.views.Gastos.Formulario" );
+    APP.views.Gastos.Formulario = Backbone.View.extend({
+
+    });
+
 });
