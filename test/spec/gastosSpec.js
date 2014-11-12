@@ -19,4 +19,8 @@ describe("Modelo Gastos", function() {
     it('Está definido', function() {
         expect(APP.models.Gastos).toBeDefined();
     });
+    it('Sirve para crear instancias de Backbone Model', function() {
+        var gastosModel = new APP.models.Gastos();
+        expect( gastosModel instanceof Backbone.Model ).toEqual( true );
+    });
 });
