@@ -23,10 +23,6 @@ describe("Model Gastos", function() {
         var gastosModel = new APP.models.Gastos();
         expect( gastosModel instanceof Backbone.Model ).toEqual( true );
     });
-    it( "Sirve para crear instancias de Backbone Model", function() {
-        var gastosModel = new APP.models.Gastos();
-        expect( gastosModel instanceof Backbone.Model ).toEqual( true );
-    });
     it( "Tiene los atributos cantidad, descripción e id", function() {
         var gastosModel = new APP.models.Gastos();
         expect( gastosModel.get( "cantidad" ) ).toEqual( null );
@@ -82,11 +78,12 @@ describe('Collection Gastos', function() {
         expect( APP.collections.Gastos ).toBeDefined();
     });
     it( "Sirve para crear instancias de Backbone Collection", function() {
-        var gastosCollection = new APP.models.Gastos();
+        var gastosCollection = new APP.collections.Gastos();
         expect( gastosCollection instanceof Backbone.Collection ).toEqual( true );
     });
-    it( "Sirve para crear instancias de Backbone Collection", function() {
-        var gastosCollection = new APP.models.Gastos();
-        expect( gastosCollection instanceof Backbone.Collection ).toEqual( true );
+    it( "Su modelo es APP.models.Gastos", function() {
+        var gastosCollection = new APP.collections.Gastos(),
+            gastosCollectionModel = new gastosCollection.model();
+        expect( gastosCollectionModel instanceof APP.models.Gastos ).toEqual( true );
     });
 });

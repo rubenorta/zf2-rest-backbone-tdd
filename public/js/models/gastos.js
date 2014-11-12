@@ -8,4 +8,9 @@ $(function(){
             "descripcion": null
         }
     });
+
+    APP.namespace( "APP.collections.Gastos" );
+    APP.collections.Gastos = Backbone.Collection.extend({
+
+    });
 });
