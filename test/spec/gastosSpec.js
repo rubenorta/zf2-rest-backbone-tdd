@@ -43,14 +43,16 @@ describe("Modelo Gastos", function() {
             this.server.restore();
         });
         it( "#save", function() {
-            var request = this.server.requests[0],
-                params = JSON.parse(request.requestBody),
+            var request, params,
                 gastosModel = new APP.models.Gastos();
             
             gastosModel.save({
                 cantidad: "1.23",
                 descripcion:"hola mundo"
             });
+
+            request = this.server.requests[0];
+            params = JSON.parse(request.requestBody);
 
             expect(params.cantidad).toEqual("1.23");
             expect(params.descripcion).toEqual("hola mundo");
