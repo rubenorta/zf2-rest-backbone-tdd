@@ -73,7 +73,7 @@ describe("Model Gastos", function() {
     });
 });
 
-describe('Collection Gastos', function() {
+describe("Collection Gastos", function() {
     it( "Está definida", function() {
         expect( APP.collections.Gastos ).toBeDefined();
     });
@@ -115,7 +115,7 @@ describe('Collection Gastos', function() {
         it( "Y es asíncrono", function() {
             expect(this.request.async).toBeTruthy();
         });
-        describe('on success', function() {
+        describe("on success", function() {
             var responseFixture = { "gastos": [
                 { "id": "1", "cantidad": "1.23", "descripcion": "Hola mundo" },
                 { "id": "2", "cantidad": "43.00", "descripcion": "Adios mundo" }
@@ -123,7 +123,7 @@ describe('Collection Gastos', function() {
 
             beforeEach(function () {
                 this.server = sinon.fakeServer.create();
-                this.server.respondWith('GET', 'gastos', [
+                this.server.respondWith("GET", "gastos", [
                     200,
                     { "Content-Type": "application/json" },
                     JSON.stringify(responseFixture)
@@ -136,10 +136,10 @@ describe('Collection Gastos', function() {
             afterEach(function() {
                 this.server.restore();
             });
-            it('Carga todos los datos', function() {
+            it("Carga todos los datos", function() {
                 expect( this.gastosCollection.models.length ).toEqual(2);
             });
-            it('Parseamos correctamente los datos del servidor', function() {
+            it("Parseamos correctamente los datos del servidor", function() {
                 expect( this.gastosCollection.get(1).attributes.cantidad ).toEqual( "1.23" );
                 expect( this.gastosCollection.get(1).attributes.descripcion ).toEqual( "Hola mundo" );
 
@@ -151,17 +151,26 @@ describe('Collection Gastos', function() {
     });
 });
 
-describe('View Gastos Item', function() {
+describe("View Gastos Item", function() {
     it( "Está definida", function() {
         expect( APP.views.Gastos.Item ).toBeDefined();
     });
     it( "Sirve para crear instancias de Backbone View", function() {
-        var gastosItemView = new APP.views.Gastos.Item();
+        var gastosItemView = new APP.views.Gastos.Item({model: APP.models.Gastos});
         expect( gastosItemView instanceof Backbone.View ).toEqual( true );
+    });
+    describe("Si la inicializamos sin modelo", function () {
+        var gastosItemView = new APP.views.Gastos.Item();
+        it("Lanza una excepción", function () {
+            expect(function () {
+                new gastosItemView();
+            }).toThrow(new Error( "Es necesario un modelo" ));
+        });
+
     });
 });
 
-describe('View Gastos Listado', function() {
+describe("View Gastos Listado", function() {
     it( "Está definida", function() {
         expect( APP.views.Gastos.Listado ).toBeDefined();
     });
@@ -171,7 +180,7 @@ describe('View Gastos Listado', function() {
     });
 });
 
-describe('View Gastos Formulario', function() {
+describe("View Gastos Formulario", function() {
     it( "Está definida", function() {
         expect( APP.views.Gastos.Formulario ).toBeDefined();
     });
