@@ -27,7 +27,7 @@ $(function(){
     APP.namespace( "APP.views.Gastos.Listado" );
     APP.views.Gastos.Listado = Backbone.View.extend({
 
-        el: "#page",
+        el: APP.pageID,
         model: null,
         collection: null,
 
@@ -79,7 +79,7 @@ $(function(){
     APP.namespace( "APP.views.Gastos.Formulario" );
     APP.views.Gastos.Formulario = Backbone.View.extend({
         
-        el: "#page",
+        el: APP.pageID,
         model: null,
         collection: null,
 
