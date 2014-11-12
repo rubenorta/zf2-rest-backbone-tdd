@@ -152,6 +152,8 @@ describe("Collection Gastos", function() {
 });
 
 describe("View Gastos Item", function() {
+    var gastosItemView, model;
+
     it( "Está definida", function() {
         expect( APP.views.Gastos.Item ).toBeDefined();
     });
@@ -164,6 +166,28 @@ describe("View Gastos Item", function() {
             expect(function () {
                 new APP.views.Gastos.Item();
             }).toThrow(new Error( "Es necesario un modelo" ));
+        });
+    });
+    describe("Se pueden crear vistas a partir de ella", function () {
+        beforeEach(function () {
+            gastosItemView = new APP.views.Gastos.Item({model: APP.models.Gastos});
+        });
+        it ("La nueva vista no es undefined", function () {
+            expect( gastosItemView ).toBeDefined();
+        });
+    });
+    describe("Se puede renderizar, si le pasamos un modelo", function () {
+        beforeEach(function () {
+            gastosModel = new APP.models.Gastos();
+            gastosModel.set({"cantidad":"1","descripcion":"aa"});
+            gastosItemView = new APP.views.Gastos.Item({model:gastosModel});
+            gastosItemView.render();
+        });
+        it ("La celda 'cantidad' vale '1'", function () {
+            expect(gastosItemView.$el.find("td.cantidad")).toContainText("1");
+        });
+        it ("La celda 'descripcion' vale 'aa'", function () {
+            expect(gastosItemView.$el.find("td.descripcion")).toContainText("aa");
         });
     });
 });
