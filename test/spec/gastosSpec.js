@@ -147,7 +147,7 @@ describe("Collection Gastos", function() {
                 expect( this.gastosCollection.get(2).attributes.descripcion ).toEqual( "Adios mundo" );
             });
 
-        })
+        });
     });
 });
 
@@ -239,6 +239,7 @@ describe("View Gastos Listado", function() {
             expect(gastosListadoView.$el.find("#gastos tr:eq(2) td.descripcion")).toContainText("cc");
         });
     });
+
 });
 
 describe("View Gastos Formulario", function() {

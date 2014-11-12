@@ -52,6 +52,10 @@ $(function(){
             this.listenTo( this.collection, 'sync', this.render );
         },
 
+        getAll: function(){
+            this.collection.fetch();
+        },
+
         render: function() {
             
             var container = document.createDocumentFragment();
