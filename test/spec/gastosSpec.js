@@ -243,11 +243,43 @@ describe("View Gastos Listado", function() {
 });
 
 describe("View Gastos Formulario", function() {
+    var gastosFormularioView;
+
     it( "Está definida", function() {
         expect( APP.views.Gastos.Formulario ).toBeDefined();
     });
     it( "Sirve para crear instancias de Backbone View", function() {
-        var gastosFormularioView = new APP.views.Gastos.Formulario();
+        gastosFormularioView = new APP.views.Gastos.Formulario();
         expect( gastosFormularioView instanceof Backbone.View ).toEqual( true );
     });
+    describe("Se pueden crear vistas a partir de ella", function () {
+        beforeEach(function () {
+            gastosModel = new APP.models.Gastos();
+            gastosItemView = new APP.views.Gastos.Item({model: gastosModel});
+        });
+        it ("La nueva vista no es undefined", function () {
+            expect( gastosItemView ).toBeDefined();
+        });
+    });
+    describe("Se renderiza en la capa #page", function () {
+        beforeEach(function () {
+            var fixture = setFixtures('<div id="page"></div>');
+            gastosFormularioView = new APP.views.Gastos.Formulario();
+            gastosFormularioView.render();
+        });
+        it("Debe usar una capa #page", function() {
+            expect(gastosFormularioView.el.nodeName).toEqual("DIV");
+        });
+        it ("Tiene un input con id #cantidad", function () {
+            expect(gastosFormularioView.$el.find("input#cantidad")).toExist();
+        });
+        it ("TIene un textarea con id #descripcion", function () {
+            expect(gastosFormularioView.$el.find("textarea#descripcion")).toExist();
+        });
+        it ("Tiene un botón para enviar datos con id #addgasto", function () {
+            expect(gastosFormularioView.$el.find("input#addgasto")).toExist();
+        });
+    });
+
+
 });
