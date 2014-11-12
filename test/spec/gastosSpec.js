@@ -50,7 +50,7 @@ describe("Model Gastos", function() {
         afterEach(function() {
             this.server.restore();
         });
-        it( "#save", function() {
+        it( "Los parámetros los envía correctamente", function() {
             expect(this.params.cantidad).toEqual("1.23");
             expect(this.params.descripcion).toEqual("hola mundo");
             expect(this.params.complete).toBeFalsy();
@@ -115,5 +115,38 @@ describe('Collection Gastos', function() {
         it( "Y es asíncrono", function() {
             expect(this.request.async).toBeTruthy();
         });
+        describe('on success', function() {
+            var responseFixture = { "gastos": [
+                { "id": "1", "cantidad": "1.23", "descripcion": "Hola mundo" },
+                { "id": "2", "cantidad": "43.00", "descripcion": "Adios mundo" }
+            ] };
+
+            beforeEach(function () {
+                this.server = sinon.fakeServer.create();
+                this.server.respondWith('GET', 'gastos', [
+                    200,
+                    { "Content-Type": "application/json" },
+                    JSON.stringify(responseFixture)
+                ]);
+
+                this.gastosCollection = new APP.collections.Gastos();
+                this.gastosCollection.fetch();
+                this.server.respond();
+            });
+            afterEach(function() {
+                this.server.restore();
+            });
+            it('Carga todos los datos', function() {
+                expect( this.gastosCollection.models.length ).toEqual(2);
+            });
+            it('Parseamos correctamente los datos del servidor', function() {
+                expect( this.gastosCollection.get(1).attributes.cantidad ).toEqual( "1.23" );
+                expect( this.gastosCollection.get(1).attributes.descripcion ).toEqual( "Hola mundo" );
+
+                expect( this.gastosCollection.get(2).attributes.cantidad ).toEqual( "43.00" );
+                expect( this.gastosCollection.get(2).attributes.descripcion ).toEqual( "Adios mundo" );
+            });
+
+        })
     });
 });
