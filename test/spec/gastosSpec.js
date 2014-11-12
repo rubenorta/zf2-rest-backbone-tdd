@@ -160,13 +160,11 @@ describe("View Gastos Item", function() {
         expect( gastosItemView instanceof Backbone.View ).toEqual( true );
     });
     describe("Si la inicializamos sin modelo", function () {
-        var gastosItemView = new APP.views.Gastos.Item();
         it("Lanza una excepción", function () {
             expect(function () {
-                new gastosItemView();
+                new APP.views.Gastos.Item();
             }).toThrow(new Error( "Es necesario un modelo" ));
         });
-
     });
 });
 
