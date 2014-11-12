@@ -152,25 +152,20 @@ describe("Collection Gastos", function() {
 });
 
 describe("View Gastos Item", function() {
-    var gastosItemView, model;
+    var gastosItemView, gastosModel;
 
     it( "Está definida", function() {
         expect( APP.views.Gastos.Item ).toBeDefined();
     });
     it( "Sirve para crear instancias de Backbone View", function() {
-        var gastosItemView = new APP.views.Gastos.Item({model: APP.models.Gastos});
+        var gastosModel = new APP.models.Gastos();
+        var gastosItemView = new APP.views.Gastos.Item({model: gastosModel});
         expect( gastosItemView instanceof Backbone.View ).toEqual( true );
-    });
-    describe("Si la inicializamos sin modelo", function () {
-        it("Lanza una excepción", function () {
-            expect(function () {
-                new APP.views.Gastos.Item();
-            }).toThrow(new Error( "Es necesario un modelo" ));
-        });
     });
     describe("Se pueden crear vistas a partir de ella", function () {
         beforeEach(function () {
-            gastosItemView = new APP.views.Gastos.Item({model: APP.models.Gastos});
+            var gastosModel = new APP.models.Gastos();
+            gastosItemView = new APP.views.Gastos.Item({model: gastosModel});
         });
         it ("La nueva vista no es undefined", function () {
             expect( gastosItemView ).toBeDefined();
@@ -193,23 +188,19 @@ describe("View Gastos Item", function() {
 });
 
 describe("View Gastos Listado", function() {
+    var gastosItemView, gastosListadoView, gastosModel;
+
     it( "Está definida", function() {
         expect( APP.views.Gastos.Listado ).toBeDefined();
     });
     it( "Sirve para crear instancias de Backbone View", function() {
-        var gastosListadoView = new APP.views.Gastos.Listado();
+        gastosListadoView = new APP.views.Gastos.Listado();
         expect( gastosListadoView instanceof Backbone.View ).toEqual( true );
-    });
-    describe("Si la inicializamos sin modelo", function () {
-        it("Lanza una excepción", function () {
-            expect(function () {
-                new APP.views.Gastos.Item();
-            }).toThrow(new Error( "Es necesario un modelo" ));
-        });
     });
     describe("Se pueden crear vistas a partir de ella", function () {
         beforeEach(function () {
-            gastosItemView = new APP.views.Gastos.Item({model: APP.models.Gastos});
+            gastosModel = new APP.models.Gastos();
+            gastosItemView = new APP.views.Gastos.Item({model: gastosModel});
         });
         it ("La nueva vista no es undefined", function () {
             expect( gastosItemView ).toBeDefined();
