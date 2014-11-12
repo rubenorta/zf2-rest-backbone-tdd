@@ -3,9 +3,9 @@ $(function(){
     APP.routers = Backbone.Router.extend({
 
         routes: {
-            "gastos/add(/)" : "add",     //matches "gastos/add" y "gastos/add/"
-            "gastos(/)"     : "listado", //matches "gastos" y "gastos/"
-            "*any"          : "redirect" //matches anything else *wildcard
+            "gastos/add(/)" : "add",
+            "gastos(/)"     : "listado",
+            "*any"          : "redirect"
         },
         
         currentView: null,
