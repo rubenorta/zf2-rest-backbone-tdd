@@ -151,6 +151,16 @@ describe('Collection Gastos', function() {
     });
 });
 
+describe('View Gastos Item', function() {
+    it( "Está definida", function() {
+        expect( APP.views.Gastos.Item ).toBeDefined();
+    });
+    it( "Sirve para crear instancias de Backbone View", function() {
+        var gastosView = new APP.views.Gastos.Item();
+        expect( gastosView instanceof Backbone.View ).toEqual( true );
+    });
+});
+
 describe('View Gastos Listado', function() {
     it( "Está definida", function() {
         expect( APP.views.Gastos.Listado ).toBeDefined();
