@@ -156,8 +156,8 @@ describe('View Gastos Item', function() {
         expect( APP.views.Gastos.Item ).toBeDefined();
     });
     it( "Sirve para crear instancias de Backbone View", function() {
-        var gastosView = new APP.views.Gastos.Item();
-        expect( gastosView instanceof Backbone.View ).toEqual( true );
+        var gastosItemView = new APP.views.Gastos.Item();
+        expect( gastosItemView instanceof Backbone.View ).toEqual( true );
     });
 });
 
@@ -166,7 +166,17 @@ describe('View Gastos Listado', function() {
         expect( APP.views.Gastos.Listado ).toBeDefined();
     });
     it( "Sirve para crear instancias de Backbone View", function() {
-        var gastosView = new APP.views.Gastos.Listado();
-        expect( gastosView instanceof Backbone.View ).toEqual( true );
+        var gastosListadoView = new APP.views.Gastos.Listado();
+        expect( gastosListadoView instanceof Backbone.View ).toEqual( true );
+    });
+});
+
+describe('View Gastos Formulario', function() {
+    it( "Está definida", function() {
+        expect( APP.views.Gastos.Formulario ).toBeDefined();
+    });
+    it( "Sirve para crear instancias de Backbone View", function() {
+        var gastosFormularioView = new APP.views.Gastos.Formulario();
+        expect( gastosFormularioView instanceof Backbone.View ).toEqual( true );
     });
 });
